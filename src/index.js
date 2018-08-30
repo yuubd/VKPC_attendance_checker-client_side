@@ -7,14 +7,14 @@ import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App/App';
 import registerServiceWorker from './registerServiceWorker';
-import { searchPlaces, requestRestaurants, changeRoute, postSignInfo } from './reducers';
+import { searchPerson, requestPeople, changeRoute, postSignInfo } from './reducers';
 import 'tachyons';
 
 const logger = createLogger();
 
 const rootReducer = combineReducers({
-	searchPlaces,
-	requestRestaurants,
+	searchPerson,
+	requestPeople,
 	changeRoute,
 	postSignInfo
 });

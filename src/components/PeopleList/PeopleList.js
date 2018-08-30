@@ -7,16 +7,11 @@ class PeopleList extends React.Component {
 			route: 'list'
 		};
 	}
-	onClickChangeRoute = (i) => {
-		this.setState({
-			route: ''
-		});
-	};
+
 	personComponent = this.props.people.map((person, i) => {
-		const { person } = this.props;
+		const { people } = this.props;
 		return (
 			<Person
-				onClickChangeRoute={() => this.onClickChangeRoute(i)}
 				key={people[i].id}
 				imageURL={people[i].imageURL}
 				name={people[i].name}
@@ -27,11 +22,7 @@ class PeopleList extends React.Component {
 	render() {
 		return (
 			<ul className="pl0 pa0 ma0 flex flex-column justify-start list">
-				{this.state.route === 'list' ? (
-					this.personComponent
-				) : (
-					<p>{this.state.route}</p>
-				)}
+				{this.personComponent}
 			</ul>
 		);
 	}

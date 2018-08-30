@@ -1,8 +1,8 @@
 import {
 	CHANGE_SEARCH_FIELD,
-	REQUEST_RESTAURANTS_PENDING,
-	REQUEST_RESTAURANTS_SUCCESS,
-	REQUEST_RESTAURANTS_FAILED,
+	REQUEST_PEOPLE_PENDING,
+	REQUEST_PEOPLE_SUCCESS,
+	REQUEST_PEOPLE_FAILED,
 	CHANGE_ROUTE,
 	POST_SIGNINFO_NAME,
 	POST_SIGNINFO_PASSWORD,
@@ -16,7 +16,7 @@ const initialStateSearch = {
 * return an output does not modify anything some input, same output
 * setting default parameter prevent errors when empty parameters passed
 */
-export const searchPlaces = (state = initialStateSearch, action = {}) => {
+export const searchPerson = (state = initialStateSearch, action = {}) => {
 	switch (action.type) {
 		case CHANGE_SEARCH_FIELD:
 			// merge state and then action.payload to an empty obj
@@ -26,22 +26,22 @@ export const searchPlaces = (state = initialStateSearch, action = {}) => {
 	}
 };
 
-const initialStateRestaurants = {
+const initialStatePeople = {
 	isPending: false,
-	restaurants: [],
+	people: [],
 	error: ''
 };
 
-export const requestRestaurants = (state = initialStateRestaurants, action = {}) => {
+export const requestPeople = (state = initialStatePeople, action = {}) => {
 	switch (action.type) {
-		case REQUEST_RESTAURANTS_PENDING:
+		case REQUEST_PEOPLE_PENDING:
 			return Object.assign({}, state, { isPending: true });
-		case REQUEST_RESTAURANTS_SUCCESS:
+		case REQUEST_PEOPLE_SUCCESS:
 			return Object.assign({}, state, {
-				restaurants: action.payload,
+				people: action.payload,
 				isPending: false
 			});
-		case REQUEST_RESTAURANTS_FAILED:
+		case REQUEST_PEOPLE_FAILED:
 			return Object.assign({}, state, {
 				error: action.payload,
 				isPending: false

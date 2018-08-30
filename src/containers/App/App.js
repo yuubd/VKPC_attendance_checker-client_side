@@ -6,15 +6,15 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import Scroll from '../../components/Scroll/Scroll';
 import SignIn from '../SignIn/SignIn';
 import './App.css';
-import { setSearchField, requestRestaurants, changeRoute } from '../../actions';
+import { setSearchField, requestPeople, changeRoute } from '../../actions';
 
 // this can replace searchField in the state
 const mapStateToProps = (state) => {
 	return {
-		searchField: state.searchPlaces.searchField,
-		restaurants: state.requestRestaurants.restaurants,
-		pending: state.requestRestaurants.isPending,
-		error: state.requestRestaurants.error,
+		searchField: state.searchPerson.searchField,
+		people: state.requestPeople.people,
+		pending: state.requestPeople.isPending,
+		error: state.requestPeople.error,
 		route: state.changeRoute.route
 	};
 };
@@ -24,67 +24,39 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-		onRequestRestaurants: () => dispatch(requestRestaurants()),
+		onRequestPeople: () => dispatch(requestPeople()),
 		onRouteChange: (routeTo) => dispatch(changeRoute(routeTo))
 	};
 };
 
 class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			user: {
-				id: '',
-				name: '',
-				email: '',
-				entries: 0,
-				joined: ''
-			}
-		};
-	}
 	componentDidMount() {
-		this.props.onRequestRestaurants();
+		this.props.onRequestPeople();
 	}
-	loadUserProfile = (user) => {
-		this.setState({
-			user: {
-				id: user.id,
-				name: user.name,
-				email: user.email,
-				entries: user.entries,
-				joined: user.joined
-			}
-		});
-	};
-	// onSearchChange = (event) => {
-	// 	this.setState({
-	// 		searchField: event.target.value
-	// 	});
-	// };
 
 	render() {
 		const {
 			searchField,
 			onSearchChange,
 			onRouteChange,
-			restaurants,
+			people,
 			isPending,
 			route
 		} = this.props;
 
-		const filteredrestaurants = restaurants.filter((restaurants) => {
-			return restaurants.name.toLowerCase().includes(searchField.toLowerCase());
+		const filteredPeople = people.filter((people) => {
+			return people.name.toLowerCase().includes(searchField.toLowerCase());
 		});
 		const navigation = (
 			<Navigation onRouteChange={onRouteChange} displayMenu={route} />
 		);
 		const signIn = <SignIn onRouteChange={onRouteChange} />;
 
-		const placeList = (
+		const peopleList = (
 			<div className="pa0 ma0 width-middle">
 				<SearchBox searchChange={onSearchChange} />
 				<Scroll>
-					<PeopleList restaurants={filteredrestaurants} />
+					<PeopleList people={filteredPeople} />
 				</Scroll>
 			</div>
 		);
@@ -92,7 +64,7 @@ class App extends Component {
 		return (
 			<div>
 				{navigation}
-				{route === 'home' ? placeList : signIn}
+				{route === 'home' ? signIn : peopleList}
 			</div>
 		);
 	}
