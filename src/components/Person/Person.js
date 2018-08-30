@@ -1,6 +1,6 @@
 import React from 'react';
 import hamburger from './public/hamburger.png';
-import './Restaurant.css';
+import './Person.css';
 
 const Restaurant = (props) => {
 	const makeBurger = (id) => {

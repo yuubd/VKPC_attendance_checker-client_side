@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/Navigation/Navigation';
-import PlaceList from '../../components/PlaceList/PlaceList';
+import PeopleList from '../../components/PeopleList/PeopleList';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Scroll from '../../components/Scroll/Scroll';
 import SignIn from '../SignIn/SignIn';
-import SignUp from '../SignUp/SignUp';
 import './App.css';
 import { setSearchField, requestRestaurants, changeRoute } from '../../actions';
 
@@ -80,17 +79,12 @@ class App extends Component {
 			<Navigation onRouteChange={onRouteChange} displayMenu={route} />
 		);
 		const signIn = <SignIn onRouteChange={onRouteChange} />;
-		const signUp = (
-			<SignUp
-				onRouteChange={onRouteChange}
-				loadUserProfile={this.loadUserProfile}
-			/>
-		);
+
 		const placeList = (
 			<div className="pa0 ma0 width-middle">
 				<SearchBox searchChange={onSearchChange} />
 				<Scroll>
-					<PlaceList restaurants={filteredrestaurants} />
+					<PeopleList restaurants={filteredrestaurants} />
 				</Scroll>
 			</div>
 		);
@@ -98,7 +92,7 @@ class App extends Component {
 		return (
 			<div>
 				{navigation}
-				{route === 'home' ? placeList : route === 'signUp' ? signUp : signIn}
+				{route === 'home' ? placeList : signIn}
 			</div>
 		);
 	}
