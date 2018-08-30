@@ -64,6 +64,7 @@ class App extends Component {
 		return (
 			<div>
 				{navigation}
+				{navigation}
 				{route === 'home' ? signIn : peopleList}
 			</div>
 		);
